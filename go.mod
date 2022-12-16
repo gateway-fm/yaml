@@ -1,4 +1,4 @@
-module gateway-fm/yaml
+module github.com/gateway-fm/yaml
 
 go 1.19
 
