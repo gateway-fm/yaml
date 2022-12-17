@@ -595,11 +595,9 @@ func getStructInfo(st reflect.Type) (*structInfo, error) {
 						inlineUnmarshalers = append(inlineUnmarshalers, append([]int{i}, index...))
 					}
 					for _, finfo := range sinfo.FieldsList {
-						if finfo.Key != "-" {
-							if _, found := fieldsMap[finfo.Key]; found {
-								msg := "duplicated key '" + finfo.Key + "' in struct " + st.String()
-								return nil, errors.New(msg)
-							}
+						if _, found := fieldsMap[finfo.Key]; found {
+							msg := "duplicated key '" + finfo.Key + "' in struct " + st.String()
+							return nil, errors.New(msg)
 						}
 						if finfo.Inline == nil {
 							finfo.Inline = []int{i, finfo.Num}
@@ -622,11 +620,9 @@ func getStructInfo(st reflect.Type) (*structInfo, error) {
 		} else {
 			info.Key = strings.ToLower(field.Name)
 		}
-		if info.Key != "-" {
-			if _, found = fieldsMap[info.Key]; found {
-				msg := "duplicated key '" + info.Key + "' in struct " + st.String()
-				return nil, errors.New(msg)
-			}
+		if _, found = fieldsMap[info.Key]; found {
+			msg := "duplicated key '" + info.Key + "' in struct " + st.String()
+			return nil, errors.New(msg)
 		}
 
 		info.Id = len(fieldsList)
